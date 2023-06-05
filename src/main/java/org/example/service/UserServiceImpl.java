@@ -7,9 +7,11 @@ import java.sql.SQLException;
 
 public class UserServiceImpl implements UserService {
 
+    public static boolean isAnyUserLoggedIn;
     private final UserRepo userRepo;
 
     public UserServiceImpl(UserRepo userRepo) {
+        isAnyUserLoggedIn = false;
         this.userRepo = userRepo;
     }
 
@@ -27,8 +29,7 @@ public class UserServiceImpl implements UserService {
         }
 
         if (userRepo.existByEmail(email)) {
-            System.out.println("User with this email address has already been registered." +
-                    "\nTry to login.");
+            System.out.println("User with this email address has already been registered.\nTry to login.");
             return 0;
         }
 
@@ -43,8 +44,8 @@ public class UserServiceImpl implements UserService {
         }
 
         long userId = userRepo.register(user);
-        System.out.println("You registered successfully" +
-                "\nYour ID is: " + userId);
+        isAnyUserLoggedIn = true;
+        System.out.println("You registered and logged in successfully\nYour ID is: " + userId);
         return userId;
     }
 
@@ -57,7 +58,19 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User login(String username, String password) {
-        return null;
+    public void login(String username, String password) throws SQLException {
+        User user = new User(username, password);
+        User result = userRepo.login(user);
+        if (result == null)
+            System.out.println("Username or Password is incorrect. ");
+        else {
+            isAnyUserLoggedIn = true;
+            System.out.println("Successfully logged in.");
+        }
+    }
+
+    @Override
+    public void logout() {
+        isAnyUserLoggedIn = false;
     }
 }

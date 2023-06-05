@@ -3,19 +3,19 @@ package org.example.entity;
 public class User {
     private long id;
     private String name;
-    private String userName;
+    private String username;
     private String email;
     private String password;
 
-    public User(String name, String userName, String email, String password) {
+    public User(String name, String username, String email, String password) {
         this.name = name;
-        this.userName = userName;
+        this.username = username;
         this.email = email;
         this.password = password;
     }
 
-    public User(String userName, String password) {
-        this.userName = userName;
+    public User(String username, String password) {
+        this.username = username;
         this.password = password;
     }
 
@@ -35,12 +35,12 @@ public class User {
         this.name = name;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getEmail() {
@@ -57,5 +57,14 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    @Override
+    public String toString() {
+        return "User info: " +
+                "\nname= " + name +
+                "\nusername= " + username +
+                "\nemail= " + email +
+                "\npassword= " + password;
     }
 }
