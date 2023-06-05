@@ -18,14 +18,13 @@ public class UserRepoImpl implements UserRepo {
     @Override
     public long register(User user) throws SQLException {
 
-        String insert = "INSERT INTO my_user (name, username, email, password) " +
-                "VALUES (?, ?, ?, ?);";
+        String insert = "INSERT INTO my_user (name, username, email, password) VALUES (?, ?, ?, ?);";
 
         PreparedStatement preparedStatement = connection.prepareStatement(insert,
                 PreparedStatement.RETURN_GENERATED_KEYS);
 
         preparedStatement.setString(1, user.getName());
-        preparedStatement.setString(2, user.getUserName());
+        preparedStatement.setString(2, user.getUsername());
         preparedStatement.setString(3, user.getEmail());
         preparedStatement.setString(4, user.getPassword());
         preparedStatement.execute();
@@ -39,8 +38,19 @@ public class UserRepoImpl implements UserRepo {
     }
 
     @Override
-    public User login(User user) {
-        return null;
+    public User login(User user) throws SQLException {
+
+        String query = "SELECT EXISTS (SELECT password FROM my_user WHERE username = ? AND password = ?);";
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        preparedStatement.setString(1, user.getUsername());
+        preparedStatement.setString(2, user.getPassword());
+        ResultSet resultSet = preparedStatement.executeQuery();
+        resultSet.next();
+        boolean exist = resultSet.getBoolean(1);
+        if (exist) {
+            return user;
+        } else
+            return null;
     }
 
     @Override
@@ -64,4 +74,21 @@ public class UserRepoImpl implements UserRepo {
         resultSet.next();
         return resultSet.getBoolean(1);
     }
+
+//    private User load(String username, String password) throws SQLException {
+//
+//        String load = "SELECT * FROM my_user WHERE username = ? AND password = ?;";
+//        PreparedStatement preparedStatement = connection.prepareStatement(load);
+//        preparedStatement.setString(1, username);
+//        preparedStatement.setString(2, password);
+//        ResultSet resultSet = preparedStatement.executeQuery();
+//
+//        if (resultSet.next()) {
+//            return new User(resultSet.getString(2),
+//                    username,
+//                    resultSet.getString(4),
+//                    password);
+//        }
+//        return null;
+//    }
 }
