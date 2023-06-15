@@ -3,11 +3,15 @@ package org.example.service;
 import java.sql.SQLException;
 
 public interface CategoryService {
-    void create(String name, String description) throws SQLException;
+    void add(String name, String description) throws SQLException;
 
-    void remove(String name) throws SQLException;
+    void removeById(long id) throws SQLException;
 
-    void edit(String oldName, String name, String description) throws SQLException;
+    void editById(long id, String name, String description) throws SQLException;
 
-    void show(String name) throws SQLException;
+    void findById(long id) throws SQLException;
+
+    void showAll() throws SQLException;
+
+    boolean isEmpty() throws SQLException;
 }

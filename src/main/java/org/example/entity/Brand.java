@@ -6,14 +6,17 @@ public class Brand {
     private String website;
     private String description;
 
-    public Brand(String name, String website, String description) {
+    public Brand(long id, String name, String website, String description) {
+        this.id = id;
         this.name = name;
         this.website = website;
         this.description = description;
     }
 
-    public Brand(String name) {
+    public Brand(String name, String website, String description) {
         this.name = name;
+        this.website = website;
+        this.description = description;
     }
 
     public long getId() {
@@ -50,10 +53,10 @@ public class Brand {
 
     @Override
     public String toString() {
-        return "Brand{" +
-                "name='" + name + '\'' +
-                ", website='" + website + '\'' +
-                ", description='" + description + '\'' +
-                '}';
+        return "\nBrand: " +
+                "\n\tid: " + id +
+                "\n\tname: " + name +
+                "\n\twebsite: " + website +
+                "\n\tdescription: " + description;
     }
 }

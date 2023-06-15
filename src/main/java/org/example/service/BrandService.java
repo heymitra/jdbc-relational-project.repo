@@ -1,15 +1,17 @@
 package org.example.service;
 
-import org.example.entity.Brand;
-
 import java.sql.SQLException;
 
 public interface BrandService {
-    void create(String name, String website, String description) throws SQLException;
+    void add(String name, String website, String description) throws SQLException;
 
-    void remove(String name) throws SQLException;
+    void removeById(long id) throws SQLException;
 
-    void edit(String oldName, String name, String website, String description) throws SQLException;
+    void editById(long id, String name, String website, String description) throws SQLException;
 
-    void show(String name) throws SQLException;
+    void findById(long id) throws SQLException;
+
+    void showAll() throws SQLException;
+
+    boolean isEmpty() throws SQLException;
 }

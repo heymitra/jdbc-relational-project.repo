@@ -1,6 +1,7 @@
-package org.example.repository;
+package org.example.repository.Impl;
 
 import org.example.entity.User;
+import org.example.repository.UserRepo;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -17,7 +18,6 @@ public class UserRepoImpl implements UserRepo {
 
     @Override
     public long register(User user) throws SQLException {
-
         String insert = "INSERT INTO my_user (name, username, email, password) VALUES (?, ?, ?, ?);";
 
         PreparedStatement preparedStatement = connection.prepareStatement(insert,
