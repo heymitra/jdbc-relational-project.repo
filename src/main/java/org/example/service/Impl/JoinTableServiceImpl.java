@@ -16,11 +16,11 @@ public class JoinTableServiceImpl implements JoinTableService {
     }
 
     @Override
-    public void takeShare(long shareholder_id, long brand_id) {
+    public void takeShare(long shareholderId, long brandId) {
         try {
-            joinTableRepo.insert(new JoinTable(shareholder_id, brand_id));
-            System.out.println(ConsoleColor.GREEN_BOLD + "Shareholder with ID " + shareholder_id +
-                    " successfully took share of brand with ID " + brand_id +ConsoleColor.RESET);
+            joinTableRepo.insert(new JoinTable(shareholderId, brandId));
+            System.out.println(ConsoleColor.GREEN_BOLD + "Shareholder with ID " + shareholderId +
+                    " successfully took share of brand with ID " + brandId +ConsoleColor.RESET);
         } catch (SQLException e) {
             // Check if the error is due to a foreign key constraint violation
             if (e.getSQLState().equals("23503"))
@@ -35,7 +35,7 @@ public class JoinTableServiceImpl implements JoinTableService {
         if (joinTableRepo.delete(new JoinTable(shareholderId, brandId)) == 0)
             System.out.println("This record is not valid.\nThis shareholder does not have share of mentioned brand.");
         else
-            System.out.println(ConsoleColor.GREEN_BOLD + "Shareholder (id: " + shareholderId +") the share of brand (id: " + brandId + ") successfully." + ConsoleColor.RESET);
+            System.out.println(ConsoleColor.GREEN_BOLD + "Shareholder (id: " + shareholderId +") has took the share of brand (id: " + brandId + ") successfully." + ConsoleColor.RESET);
     }
 
     @Override

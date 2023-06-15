@@ -313,7 +313,7 @@ public class Menu {
                     String nationalCode = scanner.nextLine();
                     System.out.print(ConsoleColor.BLUE_BOLD_BRIGHT + "Enter phone number: " + ConsoleColor.RESET);
                     String phoneNumber = scanner.nextLine();
-                    ApplicationContext.getShareholderService().add(name, nationalCode, phoneNumber);
+                    ApplicationContext.getShareholderService().add(name, phoneNumber, nationalCode);
                     break;
                 }
                 case 2: {

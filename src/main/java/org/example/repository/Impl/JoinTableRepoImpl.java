@@ -19,7 +19,7 @@ public class JoinTableRepoImpl implements JoinTableRepo {
 
     @Override
     public void insert(JoinTable joinTable) throws SQLException {
-        String insert = "INSERT INTO joinTable (shareholder_id, brand_id) VALUES (?, ?);";
+        String insert = "INSERT INTO join_table (shareholder_id, brand_id) VALUES (?, ?);";
         PreparedStatement preparedStatement = connection.prepareStatement(insert);
         preparedStatement.setLong(1, joinTable.getShareholderId());
         preparedStatement.setLong(2, joinTable.getBrandId());
